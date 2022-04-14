@@ -74,6 +74,7 @@ body {
 .nav-left .icon li ,  .nav-left .icon-b li{
     padding: 15px 0;
     width: 70px;
+    cursor: pointer;
     display: flex;
     justify-content: center;
 }
@@ -86,6 +87,10 @@ body {
 }
 .nav-left .icon li:hover svg , .nav-left .icon-b li:hover svg {
     color: #ffffff;
+}
+/* dispaly */
+.display {
+    display: block;
 }
 /* active */
 .active-li {
@@ -168,8 +173,6 @@ body {
     height: calc(100vh - 42px);
     flex: 1;
     position: absolute;
-    /* left: calc(70px + 260px);
-    width: calc(100% - 70px - 260px); */
     left: calc(70px);
     width: calc(100% - 70px);
 }
@@ -182,6 +185,7 @@ body {
     padding: 10px 25px;
     list-style: none;
     font-size: 16px;
+    cursor: pointer;
 }
 .cart-work ul li:hover {
     background-color: rgba(133, 133, 133, 0.188);
@@ -199,4 +203,7 @@ body {
 }
 .cart-work ul li p.js svg {
     color: rgb(255, 242, 0);
+}
+.githp , iframe.web {
+    display: none;
 }
