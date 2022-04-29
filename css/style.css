@@ -256,7 +256,7 @@ iframe.web {
 }
 
 /* skills */
-.skills {
+.skills , .about {
     display: none;
     color: white;
     position: relative;
@@ -265,7 +265,13 @@ iframe.web {
     left: 40px;
     top: 40px;
 }
-
+.about .t-about {
+    padding-left: 30px;
+    display: block;
+    font-size: 23px;
+    max-width: 700px;
+    text-align: justify;
+}
 .anim-sk {
     content: '';
     background-color: #1e1e1e;
@@ -319,12 +325,12 @@ iframe.web {
     }
 }
 
-.skills .tags {
+.skills .tags , .about .tags {
     color: #008cfb;
     font-size: 23px;
 }
 
-.skills h1 {
+.skills h1 , .about h1 {
     font-size: 53px;
 }
 

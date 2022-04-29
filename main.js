@@ -1,9 +1,11 @@
-// active left
+// general
 let box = document.querySelector(".box");
 let win = document.querySelector(".website");
 let liIcone = document.querySelectorAll(".nav-left .icon li");
+
+// active left
 liIcone.forEach((x) => {
-  x.addEventListener("click", () => {
+    x.addEventListener("click", () => {
     // refrese
     liIcone.forEach((x2) => x2.classList.remove("active-li"));
     // event project
@@ -28,17 +30,29 @@ liIcone.forEach((x) => {
       box.style.display = "none";
       win.setAttribute("style", "left: 70px;width: calc(100% - 70px);");
     }
+
     //skills event
     let skills = document.querySelector(".skills");
     if (x.classList.contains("skills-li")) {
       refsec();
       animtion();
       skills.setAttribute("style", "display:block;");
-    } else {
-      skills.setAttribute("style", "display:none;");
     }
   });
 });
+
+//bootm active
+let aboutsec = document.querySelector('.about')
+document.querySelectorAll('.icon-b li').forEach(function(li){
+    li.addEventListener('click', function(){
+        if (this.classList.contains('about-li')){
+            refsec();
+            animtion();
+            aboutsec.setAttribute('style','display:block;');
+        };
+    });
+});
+
 // function refrse sec
 
 function refsec() {
