@@ -3,11 +3,13 @@ let box = document.querySelector(".box");
 let win = document.querySelector(".website");
 let liIcone = document.querySelectorAll(".nav-left .icon li");
 
+
+
 // active left
 liIcone.forEach((x) => {
     x.addEventListener("click", () => {
     // refrese
-    liIcone.forEach((x2) => x2.classList.remove("active-li"));
+    refLi()
     // event project
 
     x.classList.toggle("active-li");
@@ -33,19 +35,27 @@ liIcone.forEach((x) => {
 
     //skills event
     let skills = document.querySelector(".skills");
-    if (x.classList.contains("skills-li")) {
+    if (x.classList.contains("skills-li")) {                                                                          
       refsec();
       animtion();
       skills.setAttribute("style", "display:block;");
     }
+    //contact event
+    let contact = document.querySelector('.contact')
+    if (x.classList.contains("contact-li")){
+      refsec();
+      animtion();
+      contact.setAttribute("style", "display:flex;");
+    }
   });
 });
 
-//bootm active
+//bootm active about
 let aboutsec = document.querySelector('.about')
 document.querySelectorAll('.icon-b li').forEach(function(li){
     li.addEventListener('click', function(){
         if (this.classList.contains('about-li')){
+            refLi()
             refsec();
             animtion();
             aboutsec.setAttribute('style','display:block;');
@@ -59,6 +69,11 @@ function refsec() {
   Array.from(win.children).forEach((x) =>
     x.setAttribute("style", "display:none;")
   );
+}
+
+// function refresh li
+function refLi(){
+  liIcone.forEach((x2) => x2.classList.remove("active-li"));
 }
 
 // function animtion loading
@@ -123,3 +138,31 @@ btnFilter.forEach((x) => {
     }
   });
 });
+
+// check form
+
+let NameV = document.querySelector('input[name="name"]')
+let emailV = document.querySelector('input[name="email"]')
+let regixN = /^[a-z ,.'-]+$/i
+let regixE = /[a-zA-Z0-9]+@+[a-zA-Z-\.]+\.[a-zA-Z]+/
+
+let btnsubmit = document.querySelector('form button')
+btnsubmit.addEventListener('click',function(e){
+  if (regixN.test(NameV.value) == true && regixE.test(emailV.value) == true){
+    document.querySelector('form').submit()
+  }else{
+    if (regixN.test(NameV.value) == false && regixE.test(emailV.value) == false){
+      NameV.setAttribute('style','outline:1px solid red;')
+      emailV.setAttribute('style','outline:1px solid red;')
+    }if(regixN.test(NameV.value) == false){
+      NameV.setAttribute('style','outline:1px solid red;')
+    }else{
+      NameV.setAttribute('style','outline:none;')
+    }if (regixE.test(emailV.value) == false){
+      emailV.setAttribute('style','outline:1px solid red;')
+    }else{
+      emailV.setAttribute('style','outline:none;')
+    }
+    e.preventDefault()
+  }
+})
