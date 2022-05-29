@@ -232,6 +232,8 @@ btnLi.forEach((x) => {
   });
 });
 
+let y = iframe.contentWindow;
+
 // filtter
 let btnFilter = document.querySelectorAll(".bar li");
 btnFilter.forEach((x) => {
