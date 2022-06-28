@@ -17,6 +17,7 @@
     --bgcolor-nav: #252526;
     --bgcolor-nav-manage: #252526;
     --bgcolor-input: #3c3c3c;
+    --left-var: 70px;
 }
 .shades-of-purple {
     --color-nav: #3d3a47;
@@ -90,7 +91,7 @@ ul , ol {
 /* nav left */
 .nav-left {
     background-color: var(--color-nav);
-    width: 70px;
+    width: var(--left-var);
     height: calc(100vh - 30px);
     display: flex;
     justify-content: space-between;
@@ -104,7 +105,7 @@ ul , ol {
 .nav-left .icon li,
 .nav-left .icon-b li:not(.manage-li li) {
     padding: 15px 0;
-    width: 70px;
+    width: var(--left-var);
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -142,7 +143,7 @@ ul , ol {
     height: calc(100vh - 30px);
     position: absolute;
     color: #c2c2c2;
-    left: 70px;
+    left: var(--left-var);
     font-size: 18px;
 }
 
@@ -214,8 +215,8 @@ ul , ol {
     height: calc(100vh - 30px);
     flex: 1;
     position: absolute;
-    left: calc(70px);
-    width: calc(100% - 70px);
+    left: calc(var(--left-var));
+    width: calc(100% - var(--left-var));
     background-color: var(--bgcolor-body);
 }
 
@@ -516,7 +517,7 @@ textarea~label {
 
 .manage-li {
     display: none;
-    left: 70px;
+    left: var(--left-var);
     position: absolute;
     bottom: 0;
     background: var(--bgcolor-nav);
@@ -638,5 +639,14 @@ textarea~label {
     .contact button {
         padding: 11px 16px;
         font-size: 14px;
+    }
+    .nav-left .icon svg, .nav-left .icon-b svg {
+        height: 28px;
+    }
+    :root {
+        --left-var: 45px;
+    }
+    .nav {
+        display: none;
     }
 }
