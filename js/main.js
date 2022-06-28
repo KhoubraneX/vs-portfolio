@@ -162,13 +162,16 @@ function themePicker() {
   }
 }
 
+
 // pick color from localstorage
 function themeLocalStorage() {
-  document.body.className = `${window.localStorage.theme}`
-  refrechLimanage("class")
-  refrechLimanage("name")
-  document.querySelector(`li[data-theme='${window.localStorage.theme}']`).className = "active-li-manage"
-  document.querySelector(`li[data-theme='${window.localStorage.theme}']`).setAttribute("name" , "active-theme")
+  if (window.localStorage.theme) {
+    document.body.className = `${window.localStorage.theme}`
+    refrechLimanage("class")
+    refrechLimanage("name")
+    document.querySelector(`li[data-theme='${window.localStorage.theme}']`).className = "active-li-manage"
+    document.querySelector(`li[data-theme='${window.localStorage.theme}']`).setAttribute("name" , "active-theme")
+  }
 }
 themeLocalStorage()
 
