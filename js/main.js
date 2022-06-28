@@ -19,10 +19,10 @@ liIcone.forEach((x) => {
         refsec();
       }
       box.style.display = "block";
-      win.setAttribute("style","left: calc(70px + 260px) ; width: calc(100% - 70px - 260px);");
+      win.setAttribute("style","left: calc(var(--left-var) + 260px) ; width: calc(100% - var(--left-var) - 260px);");
     } else {
       box.style.display = "none";
-      win.setAttribute("style", "left: 70px ; width: calc(100% - 70px);");
+      win.setAttribute("style", "left: var(--left-var) ; width: calc(100% - var(--left-var));");
     }
 
     //skills event

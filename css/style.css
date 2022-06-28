@@ -2,12 +2,14 @@
     font-family: vs;
     src: url(../font/CONSOLA.TTF);
 }
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: vs, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
 :root {
     --color-nav: #333333;
     --bgcolor-body: #1e1e1e;
@@ -19,6 +21,7 @@
     --bgcolor-input: #3c3c3c;
     --left-var: 70px;
 }
+
 .shades-of-purple {
     --color-nav: #3d3a47;
     --bgcolor-body: #26242a;
@@ -27,6 +30,7 @@
     --color-hover-li: #543d6b;
     --bgcolor-nav: #2c2a2e;
 }
+
 .Monokai {
     --color-nav: #272822;
     --bgcolor-body: #272822;
@@ -35,10 +39,13 @@
     --color-hover-li: #3e3d32;
     --bgcolor-nav: #1e1f1c;
 }
+
 body {
     background-color: var(--bgcolor-body);
 }
-ul , ol {
+
+ul,
+ol {
     list-style: none;
 }
 
@@ -99,9 +106,11 @@ ul , ol {
     position: absolute;
     left: 0;
 }
+
 .icon-b {
     position: relative;
 }
+
 .nav-left .icon li,
 .nav-left .icon-b li:not(.manage-li li) {
     padding: 15px 0;
@@ -110,6 +119,7 @@ ul , ol {
     display: flex;
     justify-content: center;
 }
+
 .nav-left .icon svg,
 .nav-left .icon-b svg {
     height: 36px;
@@ -192,6 +202,7 @@ ul , ol {
     text-transform: capitalize;
     cursor: pointer;
 }
+
 .bar ul li {
     width: 200px;
     padding: 0 20px;
@@ -514,7 +525,6 @@ textarea~label {
 }
 
 /* manage list */
-
 .manage-li {
     display: none;
     left: var(--left-var);
@@ -527,6 +537,7 @@ textarea~label {
     box-shadow: 0px 1px 19px -6px #0000009c;
     overflow-y: scroll;
 }
+
 .manage-li li p {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.731);
@@ -536,9 +547,11 @@ textarea~label {
     padding: 14px 0;
     cursor: pointer;
 }
+
 .manage-li li p:hover {
     background-color: var(--color-hover-li);
 }
+
 /* bar manage */
 .bar-manage {
     display: none;
@@ -549,8 +562,9 @@ textarea~label {
     color: white;
     top: 0;
     right: 50%;
-    transform: translate(50% , 0);
+    transform: translate(50%, 0);
 }
+
 .bar-manage .main {
     width: 900px;
     display: flex;
@@ -560,13 +574,16 @@ textarea~label {
     background-color: var(--bgcolor-nav);
     box-shadow: 0 4px 15px -1px #000;
 }
+
 .bar-manage .main * {
     width: 100%;
 }
+
 .bar-manage .main .search {
     padding: 7px 10px;
     box-shadow: 0 4px 15px -1px #000;
 }
+
 .bar-manage .main input {
     height: 47px;
     color: white;
@@ -576,10 +593,12 @@ textarea~label {
     border: 1px solid #007fd4;
     outline: none;
 }
+
 .bar-manage .main ul {
     font-size: 20px;
     overflow-y: scroll;
 }
+
 .bar-manage .main ul li {
     display: flex;
     justify-content: space-between;
@@ -587,19 +606,23 @@ textarea~label {
     padding: 10px 0;
     cursor: pointer;
 }
-.bar-manage .main ul li p{
+
+.bar-manage .main ul li p {
     padding: 7px 15px;
     color: rgba(239, 239, 239, 0.8);
     text-decoration: none;
 }
-.bar-manage .main ul li span{
+
+.bar-manage .main ul li span {
     max-width: fit-content;
     padding-right: 10px;
     color: var(--color-tags);
 }
+
 .bar-manage .main ul li:hover {
     background-color: rgba(211, 211, 211, 0.08);
 }
+
 .active-li-manage {
     background-color: var(--color-hover-li);
     color: white;
@@ -608,45 +631,67 @@ textarea~label {
 /* media query */
 
 @media (max-width:576px) {
-    .skills h1, .about h1 , .contact h1 {
+
+    .skills h1,
+    .about h1,
+    .contact h1 {
         font-size: 35px;
     }
+
     .sec-h img {
         height: 80px;
     }
-    .skills .tags, .about .tags {
+
+    .skills .tags,
+    .about .tags {
         font-size: 18px;
     }
-    .skills , .about {
+
+    .skills,
+    .about {
         left: 0;
     }
+
     .about .t-about {
         padding-left: 0;
         font-size: 18px;
     }
+
     .anim-sk span {
         width: 15px;
         height: 15px;
     }
-    .contact div input , .contact textarea {
+
+    .contact div input,
+    .contact textarea {
         padding: 15px;
     }
+
     .contact .contact-info {
         left: 0;
         flex-direction: column;
         gap: 10px;
     }
+
     .contact button {
         padding: 11px 16px;
         font-size: 14px;
     }
-    .nav-left .icon svg, .nav-left .icon-b svg {
+
+    .nav-left .icon svg,
+    .nav-left .icon-b svg {
         height: 28px;
     }
     :root {
         --left-var: 45px;
     }
-    .nav {
-        display: none;
+    .bar-manage .main ul , .manage-li , .bar-manage .main input {
+        font-size: 16px;
+    }
+    .f-ul li {
+        padding: 6px;
+    }
+    .manage-li {
+        width: 255px;
     }
 }
