@@ -9,20 +9,20 @@ let iframe = document.querySelector(".website iframe.web");
 
 // // get repos from github api
 
-// let requestPromise = new Promise((resolve, reject) => {
-//   let request = new XMLHttpRequest()
-//   request.onload = () => {
-//     if (request.readyState == 4 && request.status == 200) {
-//       resolve(JSON.parse(request.responseText))
-//     } else {
-//       reject(Error("repos Not found"))
-//     }
-//   }
-//   request.open("GET", "https://api.github.com/users/maroine619/repos")
-//   request.send()
-// })
-//   .then(resolve => getNameRepos(resolve))
-//   .then(buils => iframWEb())
+let requestPromise = new Promise((resolve, reject) => {
+  let request = new XMLHttpRequest()
+  request.onload = () => {
+    if (request.readyState == 4 && request.status == 200) {
+      resolve(JSON.parse(request.responseText))
+    } else {
+      reject(Error("repos Not found"))
+    }
+  }
+  request.open("GET", "https://api.github.com/users/maroine619/repos")
+  request.send()
+})
+  .then(resolve => getNameRepos(resolve))
+  .then(buils => iframWEb())
 
 
 function getNameRepos(data) {
