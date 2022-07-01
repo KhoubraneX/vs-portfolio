@@ -1,11 +1,48 @@
 // general
-let box = document.querySelector(".box");
-let win = document.querySelector(".website");
-let liIcone = document.querySelectorAll(".nav-left .icon li");
+const box = document.querySelector(".box");
+const win = document.querySelector(".website");
+const liIcone = document.querySelectorAll(".nav-left .icon li");
+const cartWork = document.querySelector(".cart-work ul");
+let iframe = document.querySelector(".website iframe.web");
+
+
+
+// get repos from github api
+
+let requestPromise = new Promise((resolve, reject) => {
+  let request = new XMLHttpRequest()
+  request.onload = () => {
+    if (request.readyState == 4 && request.status == 200) {
+      resolve(JSON.parse(request.responseText))
+    } else {
+      reject(Error("repos Not found"))
+    }
+  }
+  request.open("GET", "https://api.github.com/users/maroine619/repos")
+  request.send()
+})
+  .then(resolve => getNameRepos(resolve))
+  .then(buils => iframWEb())
+
+
+function getNameRepos(data) {
+  for (let repos of data) {
+    let li = document.createElement("li")
+    li.className = "wo"
+    cartWork.appendChild(li)
+    let svg = '<p><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-filetype-html" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M14 4.5V11h-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5Zm-9.736 7.35v3.999h-.791v-1.714H1.79v1.714H1V11.85h.791v1.626h1.682V11.85h.79Zm2.251.662v3.337h-.794v-3.337H4.588v-.662h3.064v.662H6.515Zm2.176 3.337v-2.66h.038l.952 2.159h.516l.946-2.16h.038v2.661h.715V11.85h-.8l-1.14 2.596H9.93L8.79 11.85h-.805v3.999h.706Zm4.71-.674h1.696v.674H12.61V11.85h.79v3.325Z"/></svg>'
+    if (repos["language"] == "javascript") {
+      svg = '<p><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-filetype-js" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2H8v-1h4a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM3.186 15.29a1.176 1.176 0 0 1-.111-.449h.765a.578.578 0 0 0 .255.384c.07.049.153.087.249.114.095.028.202.041.319.041.164 0 .302-.023.413-.07a.559.559 0 0 0 .255-.193.507.507 0 0 0 .085-.29.387.387 0 0 0-.153-.326c-.101-.08-.255-.144-.462-.193l-.619-.143a1.72 1.72 0 0 1-.539-.214 1.001 1.001 0 0 1-.351-.367 1.068 1.068 0 0 1-.123-.524c0-.244.063-.457.19-.639.127-.181.303-.322.528-.422.224-.1.483-.149.776-.149.305 0 .564.05.78.152.216.102.383.239.5.41.12.17.186.359.2.566h-.75a.56.56 0 0 0-.12-.258.624.624 0 0 0-.247-.181.923.923 0 0 0-.369-.068c-.217 0-.388.05-.513.152a.472.472 0 0 0-.184.384c0 .121.048.22.143.3a.97.97 0 0 0 .405.175l.62.143c.218.05.406.12.566.211.16.09.285.21.375.358.09.148.135.335.135.56 0 .247-.063.466-.188.656a1.216 1.216 0 0 1-.539.439c-.234.105-.52.158-.858.158-.254 0-.476-.03-.665-.09a1.404 1.404 0 0 1-.478-.252 1.13 1.13 0 0 1-.29-.375Zm-3.104-.033A1.32 1.32 0 0 1 0 14.791h.765a.576.576 0 0 0 .073.27.499.499 0 0 0 .454.246c.19 0 .33-.055.422-.164.092-.11.138-.265.138-.466v-2.745h.79v2.725c0 .44-.119.774-.357 1.005-.236.23-.564.345-.984.345a1.59 1.59 0 0 1-.569-.094 1.145 1.145 0 0 1-.407-.266 1.14 1.14 0 0 1-.243-.39Z"/></svg>'
+    }
+    let name = `${repos["name"]}</p>`
+    li.innerHTML += svg
+    li.innerHTML += name
+  }
+}
 
 // active left
 liIcone.forEach((x) => {
-    x.addEventListener("click", () => {
+  x.addEventListener("click", () => {
     // refrese
     refLi()
     // event project
@@ -19,7 +56,7 @@ liIcone.forEach((x) => {
         refsec();
       }
       box.style.display = "block";
-      win.setAttribute("style","left: calc(var(--left-var) + 260px) ; width: calc(100% - var(--left-var) - 260px);");
+      win.setAttribute("style", "left: calc(var(--left-var) + 260px) ; width: calc(100% - var(--left-var) - 260px);");
     } else {
       box.style.display = "none";
       win.setAttribute("style", "left: var(--left-var) ; width: calc(100% - var(--left-var));");
@@ -27,14 +64,14 @@ liIcone.forEach((x) => {
 
     //skills event
     let skills = document.querySelector(".skills");
-    if (x.classList.contains("skills-li")) {                                                                          
+    if (x.classList.contains("skills-li")) {
       refsec();
       animtion();
       skills.setAttribute("style", "display:block;");
     }
     //contact event
     let contact = document.querySelector('.contact')
-    if (x.classList.contains("contact-li")){
+    if (x.classList.contains("contact-li")) {
       refsec();
       animtion();
       contact.setAttribute("style", "display:flex;");
@@ -45,32 +82,32 @@ liIcone.forEach((x) => {
 //bootm active about
 let aboutsec = document.querySelector('.about')
 let manage = document.querySelector('.manage-li')
-document.querySelectorAll('.icon-b li').forEach(function(li){
-    li.addEventListener('click', function(){
-        if (this.classList.contains('about-li')){
-            refLi();
-            refsec();
-            animtion();
-            // display box
-            aboutsec.setAttribute('style','display:block;');
-            win.setAttribute("style", "left: 70px ; width: calc(100% - 70px);");
-          };
-          if (this.classList.contains('manage')){
-            if (getComputedStyle(manage).display == "none"){
-              manage.style.display = "block"
-            }else{
-              manage.style.display = "none"
-            }
-          }
-    });
+document.querySelectorAll('.icon-b li').forEach(function (li) {
+  li.addEventListener('click', function () {
+    if (this.classList.contains('about-li')) {
+      refLi();
+      refsec();
+      animtion();
+      // display box
+      aboutsec.setAttribute('style', 'display:block;');
+      win.setAttribute("style", "left: 70px ; width: calc(100% - 70px);");
+    };
+    if (this.classList.contains('manage')) {
+      if (getComputedStyle(manage).display == "none") {
+        manage.style.display = "block"
+      } else {
+        manage.style.display = "none"
+      }
+    }
+  });
 });
 
 // input theme manage color theme
-document.querySelector(".search input").addEventListener("keyup" , (i)=> {
-  document.querySelectorAll(".theme-li li p").forEach((e)=>{
-    if (e.textContent.toString().toLowerCase().includes(i.target.value.toString().toLowerCase()) != true && i.target.value != ""){
+document.querySelector(".search input").addEventListener("keyup", (i) => {
+  document.querySelectorAll(".theme-li li p").forEach((e) => {
+    if (e.textContent.toString().toLowerCase().includes(i.target.value.toString().toLowerCase()) != true && i.target.value != "") {
       e.parentElement.style.display = "none"
-    }else{
+    } else {
       e.parentElement.style.display = "flex"
     }
   })
@@ -79,86 +116,86 @@ document.querySelector(".search input").addEventListener("keyup" , (i)=> {
 // set color active li !!important
 
 document.querySelector("li[data-theme='Dark']").className = "active-li-manage"
-document.querySelector("li[data-theme='Dark']").setAttribute("name" , "active-theme")
+document.querySelector("li[data-theme='Dark']").setAttribute("name", "active-theme")
 
 // list manage color theme
 let colorThemeList = document.querySelector('.bar-manage')
-manage.firstElementChild.addEventListener('click', ()=> {
-  if (getComputedStyle(colorThemeList).display == "none"){
-    colorThemeList.style.display = "flex"  
+manage.firstElementChild.addEventListener('click', () => {
+  if (getComputedStyle(colorThemeList).display == "none") {
+    colorThemeList.style.display = "flex"
     manage.style.display = 'none'
-  }else {
+  } else {
     colorThemeList.style.display = "none"
   }
 })
 
 // list manage color (theme mouse) 
-document.querySelectorAll(".theme-li li").forEach((e)=>{
-  e.addEventListener('click' , function(){
+document.querySelectorAll(".theme-li li").forEach((e) => {
+  e.addEventListener('click', function () {
     refrechLimanage("class")
     refrechLimanage("name")
     e.className = "active-li-manage"
-    e.setAttribute("name" , "active-theme")
+    e.setAttribute("name", "active-theme")
     themePicker()
     colorThemeList.style.display = "none"
   })
 })
 
 // list manage color theme (keyboard)
-window.addEventListener('keydown' , function(e){
-  if (getComputedStyle(colorThemeList).display != "none"){
-      switch (e.key){
-          case "ArrowUp":
-            if (colorThemeList.querySelector('ul li[name="active-theme"]').previousElementSibling != null){
-              refrechLimanage("class")
-              colorThemeList.querySelector('ul li[name="active-theme"]').previousElementSibling.classList.toggle('active-li-manage')
-              refrechLimanage("name")
-              colorThemeList.querySelector('ul li.active-li-manage').setAttribute('name','active-theme')
-            }else {
-              refrechLimanage("class")
-              colorThemeList.querySelector('ul li:last-child').classList.toggle('active-li-manage')
-              refrechLimanage("name")
-              colorThemeList.querySelector('ul li.active-li-manage').setAttribute('name','active-theme')
-            }
-            themePicker()
-            break;
+window.addEventListener('keydown', function (e) {
+  if (getComputedStyle(colorThemeList).display != "none") {
+    switch (e.key) {
+      case "ArrowUp":
+        if (colorThemeList.querySelector('ul li[name="active-theme"]').previousElementSibling != null) {
+          refrechLimanage("class")
+          colorThemeList.querySelector('ul li[name="active-theme"]').previousElementSibling.classList.toggle('active-li-manage')
+          refrechLimanage("name")
+          colorThemeList.querySelector('ul li.active-li-manage').setAttribute('name', 'active-theme')
+        } else {
+          refrechLimanage("class")
+          colorThemeList.querySelector('ul li:last-child').classList.toggle('active-li-manage')
+          refrechLimanage("name")
+          colorThemeList.querySelector('ul li.active-li-manage').setAttribute('name', 'active-theme')
+        }
+        themePicker()
+        break;
 
-          case "ArrowDown":
-            if (colorThemeList.querySelector('ul li[name="active-theme"]').nextElementSibling != null){
-              refrechLimanage("class")
-              colorThemeList.querySelector('ul li[name="active-theme"]').nextElementSibling.classList.toggle('active-li-manage')
-              refrechLimanage("name")
-              colorThemeList.querySelector('ul li.active-li-manage').setAttribute('name','active-theme')
-            }else{
-              refrechLimanage("class")
-              colorThemeList.querySelector('ul li:first-child').classList.toggle('active-li-manage')
-              refrechLimanage("name")
-              colorThemeList.querySelector('ul li.active-li-manage').setAttribute('name','active-theme')
-            }
-            themePicker()
-            break;
+      case "ArrowDown":
+        if (colorThemeList.querySelector('ul li[name="active-theme"]').nextElementSibling != null) {
+          refrechLimanage("class")
+          colorThemeList.querySelector('ul li[name="active-theme"]').nextElementSibling.classList.toggle('active-li-manage')
+          refrechLimanage("name")
+          colorThemeList.querySelector('ul li.active-li-manage').setAttribute('name', 'active-theme')
+        } else {
+          refrechLimanage("class")
+          colorThemeList.querySelector('ul li:first-child').classList.toggle('active-li-manage')
+          refrechLimanage("name")
+          colorThemeList.querySelector('ul li.active-li-manage').setAttribute('name', 'active-theme')
+        }
+        themePicker()
+        break;
 
-          case "Enter":
-            colorThemeList.style.display = "none"
-            themePicker()
-            break;
-      }
+      case "Enter":
+        colorThemeList.style.display = "none"
+        themePicker()
+        break;
+    }
   }
 })
 
 // pick color from keyboard event
 function themePicker() {
-  if (colorThemeList.querySelector('ul li[name="active-theme"]').dataset.theme == "Dark"){
+  if (colorThemeList.querySelector('ul li[name="active-theme"]').dataset.theme == "Dark") {
     document.body.className = ""
     window.localStorage.theme = ""
   }
-  else if(colorThemeList.querySelector('ul li[name="active-theme"]').dataset.theme == "Monokai"){
-      document.body.className = "Monokai"
-      window.localStorage.theme = "Monokai"
+  else if (colorThemeList.querySelector('ul li[name="active-theme"]').dataset.theme == "Monokai") {
+    document.body.className = "Monokai"
+    window.localStorage.theme = "Monokai"
   }
-  else if (colorThemeList.querySelector('ul li[name="active-theme"]').dataset.theme == "shades-of-purple"){
-      document.body.className = "shades-of-purple"
-      window.localStorage.theme = "shades-of-purple"
+  else if (colorThemeList.querySelector('ul li[name="active-theme"]').dataset.theme == "shades-of-purple") {
+    document.body.className = "shades-of-purple"
+    window.localStorage.theme = "shades-of-purple"
   }
 }
 
@@ -170,15 +207,15 @@ function themeLocalStorage() {
     refrechLimanage("class")
     refrechLimanage("name")
     document.querySelector(`li[data-theme='${window.localStorage.theme}']`).className = "active-li-manage"
-    document.querySelector(`li[data-theme='${window.localStorage.theme}']`).setAttribute("name" , "active-theme")
+    document.querySelector(`li[data-theme='${window.localStorage.theme}']`).setAttribute("name", "active-theme")
   }
 }
 themeLocalStorage()
 
 // function to remove active className and name attr
-function refrechLimanage(attr){
-  colorThemeList.querySelectorAll("ul li").forEach((e)=>{
-    e.setAttribute(`${attr}`,"")
+function refrechLimanage(attr) {
+  colorThemeList.querySelectorAll("ul li").forEach((e) => {
+    e.setAttribute(`${attr}`, "")
   })
 }
 
@@ -190,7 +227,7 @@ function refsec() {
 }
 
 // function refresh li
-function refLi(){
+function refLi() {
   liIcone.forEach((x2) => x2.classList.remove("active-li"));
 }
 
@@ -221,19 +258,20 @@ btnshow.addEventListener("click", () => {
 });
 
 // ifarm website
-let iframe = document.querySelector(".website iframe.web");
-let btnLi = document.querySelectorAll(".cart-work ul li");
-btnLi.forEach((x) => {
-  x.addEventListener("click", () => {
-    animtion();
-    document.querySelector(".title").textContent = x.textContent;
-    iframe.style.display = "block";
-    iframe.src = `https://maroine619.github.io/${x.className}/`;
-    if (getComputedStyle(win).display == "none") {
-      win.style.display = "block";
-    }
+function iframWEb() {
+  let btnLi = document.querySelectorAll(".cart-work ul li");
+  btnLi.forEach((x) => {
+    x.addEventListener("click", () => {
+      animtion();
+      document.querySelector(".title").textContent = x.textContent;
+      iframe.style.display = "block";
+      iframe.src = `https://maroine619.github.io/${x.textContent}/`;
+      if (getComputedStyle(win).display == "none") {
+        win.style.display = "block";
+      }
+    });
   });
-});
+}
 
 let y = iframe.contentWindow;
 
@@ -266,21 +304,21 @@ let regixN = /^[a-z ,.'-]+$/i
 let regixE = /[a-zA-Z0-9]+@+[a-zA-Z-\.]+\.[a-zA-Z]+/
 
 let btnsubmit = document.querySelector('form button')
-btnsubmit.addEventListener('click',function(e){
-  if (regixN.test(NameV.value) == true && regixE.test(emailV.value) == true){
+btnsubmit.addEventListener('click', function (e) {
+  if (regixN.test(NameV.value) == true && regixE.test(emailV.value) == true) {
     document.querySelector('form').submit()
-  }else{
-    if (regixN.test(NameV.value) == false && regixE.test(emailV.value) == false){
-      NameV.setAttribute('style','outline:1px solid red;')
-      emailV.setAttribute('style','outline:1px solid red;')
-    }if(regixN.test(NameV.value) == false){
-      NameV.setAttribute('style','outline:1px solid red;')
-    }else{
-      NameV.setAttribute('style','outline:none;')
-    }if (regixE.test(emailV.value) == false){
-      emailV.setAttribute('style','outline:1px solid red;')
-    }else{
-      emailV.setAttribute('style','outline:none;')
+  } else {
+    if (regixN.test(NameV.value) == false && regixE.test(emailV.value) == false) {
+      NameV.setAttribute('style', 'outline:1px solid red;')
+      emailV.setAttribute('style', 'outline:1px solid red;')
+    } if (regixN.test(NameV.value) == false) {
+      NameV.setAttribute('style', 'outline:1px solid red;')
+    } else {
+      NameV.setAttribute('style', 'outline:none;')
+    } if (regixE.test(emailV.value) == false) {
+      emailV.setAttribute('style', 'outline:1px solid red;')
+    } else {
+      emailV.setAttribute('style', 'outline:none;')
     }
     e.preventDefault()
   }
