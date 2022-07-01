@@ -660,21 +660,39 @@ textarea~label {
     display: flex;
     justify-content: center;
     align-items: center;
+    display: none;
 }
-
-.smm {
-    width: calc(160px + 30px);
-    overflow: hidden;
-}
-
 .smm-scroll {
     display: flex;
     gap: 30px;
-    transition: 0.5s linear;
 }
-
+.smm-scroll div {
+    background-color: #ffffff03;
+    box-shadow: inset 0px 0px 20px 0px #ffffffe8;
+    width:  139px;
+    height: 139px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
 .smm-scroll img {
     height: 80px;
+}
+
+/* slider */
+
+.slider {
+    width: 40%;
+    overflow: hidden;
+    position: absolute;
+    height: 139px;
+}
+.slider-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
 }
 
 /* media query */
